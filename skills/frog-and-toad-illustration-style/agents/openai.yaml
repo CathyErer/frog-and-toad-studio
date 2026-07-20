@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frog and Toad Illustration Style"
+  short_description: "Generate consistent Frog and Toad course illustrations"
+  default_prompt: "Use $frog-and-toad-illustration-style to generate matching square watercolor course illustrations from my chapter prompt list."

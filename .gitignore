@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Word temp files
+~$*.docx
+
+# Python
+__pycache__/
+*.pyc
+
+# packaged skill archives
+*.skill
+*.zip
+
+# Per-machine configuration and generated private course content
+config.local.json
+课程总结与作业（微信版）.md
+Frog and Toad 课程设计思路.md
