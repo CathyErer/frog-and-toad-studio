@@ -90,6 +90,28 @@ For emotion cards:
 Toad is the main focus. Use a simple portrait or full-body pose with one small symbolic cue, such as a red scribble cloud, sweat drop, rain cloud, lightning spark, or heart.
 ```
 
+## Insert Illustrations into the Keyword-Map HTML
+
+After saving the PNGs, inject them into the chapter's 关键词地图 HTML when it exists. This layout is LOCKED — copy the pattern exactly, never invent a new one:
+
+1. Keep images as separate files in `illustrations/` next to the HTML and reference them with relative paths (`illustrations/<chapter-id>-<slot>-<short-kebab-description>.png`). Do NOT base64-embed.
+2. Add these CSS rules once (skip if already present):
+
+```css
+.mini .ic img{width:100%;max-width:112px;aspect-ratio:1/1;object-fit:cover;mix-blend-mode:multiply;display:block;margin:0 auto;border-radius:10px;}
+.feel-stop .emo img{width:100%;height:100%;object-fit:cover;border-radius:50%;mix-blend-mode:multiply;display:block;}
+```
+
+If the chapter's cards use a different grid class (e.g. `.mishap .m .ic`), add an equivalent rule with the same properties. `mix-blend-mode:multiply` is what melts the white image background into the cream paper — never omit it.
+
+3. Placement by slot group:
+   - **A slots (Problem board)** → the matching problem card's icon `<div class="ic">`: replace the emoji with `<img src="illustrations/..." alt="...">`, keep the keyword text beside it.
+   - **B slots (Solution board)** → same pattern in the matching action card's `.ic`.
+   - **C slots (emotion cards)** → inside the matching `<div class="emo">` circle on the feelings line, replacing the emoji.
+4. Give every `<img>` a short English `alt` describing the scene.
+5. Bump the `<!-- contentVersion: ... -->` comment near the top of the HTML (e.g. `2026-07-20-illustrations-v2`) so stale cached views refresh.
+6. Self-check before finishing: run an HTML tag-balance check (Python HTMLParser) and verify every `src` path exists on disk.
+
 ## Quality Check
 
 Before finishing, verify:

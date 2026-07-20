@@ -172,6 +172,7 @@ Story Map 填动词（6 行，cue 逐字引文）→ Think! 推断题 → 寓意
 - `<SKILL_DIR>/scripts/make_workbooks.py` — Workbook 生成器 + EXAMPLE config
 - `<SKILL_DIR>/scripts/sync_vocabulary_to_html.py` — 从 Obsidian 关键词地图同步 Vocabulary tab 到 20 个 HTML
 - `<SKILL_DIR>/references/course-map.md` — 全系列 20 课总表（寓意/思考题/动词词库），改总结或补课时查这里
+- `<SKILL_DIR>/skills/frog-and-toad-illustration-style/` — 插画子 skill：画风规则 + 20 章提示词库（prompts/）+ 插图注入关键词地图 HTML 的锁定版式
 
 ## 交付清单（每章完成前过一遍）
 
