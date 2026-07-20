@@ -5,6 +5,15 @@ description: Generate consistent Frog and Toad course illustrations in the estab
 
 # Frog and Toad Illustration Style
 
+## Bundled Prompt Library
+
+`prompts/` ships ready-made prompt lists for all 20 chapters, named in teaching order:
+`01-tomorrow.md` … `05-alone.md` (Days with Frog and Toad), `06-down-the-hill.md` … `10-christmas-eve.md` (All Year), `11-a-list.md` … `15-the-dream.md` (Together), `16-spring.md` … `20-the-letter.md` (Are Friends).
+
+When the user asks for a chapter's illustrations without supplying their own prompt file, use the matching bundled file as the source prompt list. A user-supplied `*画图.md` file always takes priority over the bundled copy.
+
+Generating images requires the agent to have an image-generation capability (built-in tool, MCP image server, or API). If none is available, tell the user instead of silently skipping.
+
 ## Core Style
 
 Use the built-in image generation workflow by default. Generate raster PNG illustrations, not SVGs.

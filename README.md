@@ -32,6 +32,7 @@ frog-and-toad-studio/
 └── skills/
     └── frog-and-toad-illustration-style/
         ├── SKILL.md                ← sub-skill: consistent watercolor illustration style
+        ├── prompts/                ← ready-made illustration prompt lists for all 20 chapters
         └── agents/openai.yaml
 ```
 
