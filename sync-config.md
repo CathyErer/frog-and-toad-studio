@@ -32,7 +32,8 @@
 - 每章 `Workbook 答案版.docx`
 - 每章 mp3 音频
 - `90_参考资料/` 原书 PDF / Homework PDF / Study Guide
-- `99_归档/` 旧同步副本和历史残留文件，不作为正式课件来源
+- `_skill/frog-and-toad-studio/` 唯一正式 Skill 源
+- `_skill/_archive/` Skill 历史副本和旧打包文件，不作为当前来源
 
 Skill 可以安装或克隆到其他位置，以 `<SKILL_DIR>` 为准，不要求位于主资料库内部。
 
@@ -61,7 +62,7 @@ Skill 可以安装或克隆到其他位置，以 `<SKILL_DIR>` 为准，不要�
 - `config.local.json` — 本机路径配置
 - `课程总结与作业（微信版）.md` — 微信版总结主文件
 - `Frog and Toad 课程设计思路.md` — 私人设计笔记
-- `frog-and-toad-studio.skill` — 本地打包产物
+- 按需生成的 `.skill` — 本地派生安装包，不能代替正式源
 
 ### Obsidian 课程追踪目录
 

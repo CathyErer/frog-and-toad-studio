@@ -56,7 +56,7 @@ Frog and Toad精读课/
 ```
 
 Skill 文件夹：`<SKILL_DIR>/`。其中可保存本地生成的
-`课程总结与作业（微信版）.md` 和可安装的 `frog-and-toad-studio.skill`；这两类本地文件不提交到公开仓库。
+`课程总结与作业（微信版）.md`，也可按需从当前正式源生成安装包；这类本地文件不提交到公开仓库。
 
 **教学顺序 = 文件夹书序**（Days with → All Year → Together → Are Friends），全系列课号 01–20。
 
