@@ -230,6 +230,19 @@ h2.sec::after{
 .theme-card.t1{background:var(--toad-wash); transform:rotate(.35deg);}
 .theme-card.t2{background:var(--card); transform:rotate(-.35deg);}
 
+/* vocabulary */
+.vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+@media(max-width:820px){.vocab-grid{grid-template-columns:1fr;}}
+.vocab-card{position:relative;padding:18px 20px 16px 64px;background:#fffdf4;min-height:156px;}
+.vocab-card:nth-child(4n+1){background:var(--frog-wash);transform:rotate(-.35deg);}
+.vocab-card:nth-child(4n+2){background:var(--toad-wash);transform:rotate(.35deg);}
+.vocab-card:nth-child(4n+3){background:#fff8e9;transform:rotate(.2deg);}
+.vocab-card:nth-child(4n+4){background:#f3f0df;transform:rotate(-.2deg);}
+.vocab-num{position:absolute;left:18px;top:18px;width:34px;height:34px;border:2.5px solid var(--ink);border-radius:50%;background:var(--sun);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:var(--shadow);}
+.vocab-card h3{font-size:1.45rem;color:var(--frog-deep);line-height:1.1;margin-bottom:8px;}
+.vocab-card p{font-size:1.06rem;line-height:1.45;font-weight:650;margin:5px 0;}
+.vocab-card .example{font-family:"Patrick Hand","PingFang SC",cursive;font-size:1.18rem;color:var(--toad-deep);}
+
 footer{
   text-align:center; margin-top:40px;
   font-family:"Patrick Hand",cursive; font-size:1rem; color:var(--ink-soft);
@@ -249,9 +262,10 @@ footer{
 <nav>
   <div class="nav-inner">
     <button class="tabbtn active" data-tab="warmup">① Warm-up <span class="zh">读前</span></button>
-    <button class="tabbtn" data-tab="map">② The Story Map</button>
-    <button class="tabbtn" data-tab="char">③ Characters <span class="zh">人物 & 情绪线</span></button>
-    <button class="tabbtn" data-tab="theme">④ Theme <span class="zh">寓意</span></button>
+    <button class="tabbtn" data-tab="vocab">② Vocabulary <span class="zh">词汇</span></button>
+    <button class="tabbtn" data-tab="map">③ The Story Map</button>
+    <button class="tabbtn" data-tab="char">④ Characters <span class="zh">人物 & 情绪线</span></button>
+    <button class="tabbtn" data-tab="theme">⑤ Theme <span class="zh">寓意</span></button>
     <div class="nav-right"><button id="langBtn">EN only</button></div>
   </div>
 </nav>
@@ -275,7 +289,25 @@ footer{
   </div>
 </section>
 
-<!-- ② story map -->
+<!-- ② vocabulary: replace all ten cards with the confirmed chapter vocabulary -->
+<section class="tab" id="vocab">
+  <h2 class="sec">Vocabulary <span class="zh">10 个核心词汇</span></h2>
+  <p class="hint">Read the word, say the meaning, then make your own sentence. <span class="zh">读词 → 说意思 → 造句。EN only 会隐藏中文解释。</span></p>
+  <div class="vocab-grid">
+    <div class="vocab-card wob"><div class="vocab-num">01</div><h3>spring</h3><p><b>EN:</b> the season after winter.</p><p><span class="zh"><b>中文：</b>春天</span></p><p class="example">Example: It is spring now.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">02</div><h3>wake up</h3><p><b>EN:</b> stop sleeping.</p><p><span class="zh"><b>中文：</b>醒来</span></p><p class="example">Example: Frog told Toad to wake up.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">03</div><h3>sleepy</h3><p><b>EN:</b> ready or wanting to sleep.</p><p><span class="zh"><b>中文：</b>困倦的</span></p><p class="example">Example: Toad felt sleepy.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">04</div><h3>clear</h3><p><b>EN:</b> bright and easy to see through.</p><p><span class="zh"><b>中文：</b>清澈的、明亮的</span></p><p class="example">Example: The morning was clear.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">05</div><h3>April</h3><p><b>EN:</b> the fourth month of the year.</p><p><span class="zh"><b>中文：</b>四月</span></p><p class="example">Example: April comes in spring.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">06</div><h3>whole</h3><p><b>EN:</b> all of something.</p><p><span class="zh"><b>中文：</b>整个的</span></p><p class="example">Example: They spent the whole day together.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">07</div><h3>together</h3><p><b>EN:</b> with each other.</p><p><span class="zh"><b>中文：</b>一起</span></p><p class="example">Example: Frog and Toad went outside together.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">08</div><h3>calendar</h3><p><b>EN:</b> a chart that shows days and months.</p><p><span class="zh"><b>中文：</b>日历</span></p><p class="example">Example: Frog looked at the calendar.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">09</div><h3>tore off</h3><p><b>EN:</b> pulled something away by tearing.</p><p><span class="zh"><b>中文：</b>撕掉</span></p><p class="example">Example: He tore off a piece of paper.</p></div>
+    <div class="vocab-card wob"><div class="vocab-num">10</div><h3>lonely</h3><p><b>EN:</b> sad because you are alone.</p><p><span class="zh"><b>中文：</b>孤单的</span></p><p class="example">Example: Frog did not want to feel lonely.</p></div>
+  </div>
+</section>
+
+<!-- ③ story map -->
 <!-- NOTE (open-source template): all story text below is ORIGINAL sample copy written for this
      template — it is NOT quoted from the book. When building a real lesson, replace it with
      content transcribed and verified VERBATIM against your own copy of the book. -->
