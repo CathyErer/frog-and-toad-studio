@@ -152,10 +152,12 @@ body.kw-hide .rcard:not(.show) .kwrow{visibility:hidden}
 .ink{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .ink path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .ink path.hl{mix-blend-mode:multiply;opacity:.55}
-.tbox{position:absolute;min-width:36px;max-width:520px;padding:4px 14px;background:#fff;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.22);font:700 28px/1.25 "Arial Rounded MT Bold","Baloo 2","PingFang SC","Microsoft YaHei",sans-serif;white-space:pre-wrap;outline:none;pointer-events:none;-webkit-user-select:text;user-select:text}
+.tbox{position:absolute;min-width:36px;width:max-content;max-width:520px;box-sizing:border-box;padding:4px 14px;background:#fff;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.22);font:700 28px/1.25 "Arial Rounded MT Bold","Baloo 2","PingFang SC","Microsoft YaHei",sans-serif;white-space:pre-wrap;outline:none;pointer-events:none;-webkit-user-select:text;user-select:text}
 .tbox:focus{box-shadow:0 0 0 2px var(--olive),0 3px 10px rgba(0,0,0,.22)}
 body.m-note #page,body.m-note .left,body.m-note .board{touch-action:none;-webkit-user-select:none;user-select:none}
 body.m-note.t-text .tbox{pointer-events:auto}
+.tbox.fixw{max-width:none}
+body.m-note.t-text .tbox::after{content:"";position:absolute;right:-7px;top:50%;width:8px;height:26px;margin-top:-13px;border-radius:5px;background:var(--olive);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25);cursor:ew-resize}
 body.hide-notes main>:not(#holder) .ink,body.hide-notes main>:not(#holder) .tbox{display:none}
 #holder{position:absolute;left:-99999px;top:0;pointer-events:none}
 /* bottom bar */
@@ -239,6 +241,7 @@ body.m-note.t-text .tbox:not(:focus){cursor:move !important}
     <button class="listen play" id="listen">▶ Listen</button>
     <button class="speed play" id="speed">1.0×</button>
     <button class="kwbtn" id="kw">Hide keywords</button>
+    <button class="kwbtn" id="rpdf" title="只把复述这一页存成 PDF（横向 A4，所见即所得）"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg> Retell PDF</button>
     <div class="pens" id="pens">
       <button class="tool on" data-t="pen" title="画笔：圈、划线、箭头"><svg class="ic" viewBox="0 0 24 24"><path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M14 6l4 4"/></svg> Pen</button>
       <button class="tool" data-t="hl" title="荧光笔"><svg class="ic" viewBox="0 0 24 24"><path d="M9 14l6-9 4 3-6 9z"/><path d="M9 14l-2 4 4 1 2-2"/><path d="M4 21h8"/></svg> Highlight</button>
@@ -387,7 +390,7 @@ function pathD(pts){if(pts.length===1)return `M${pts[0][0]} ${pts[0][1]}l.01 0`;
 function drawAnn(page,list,live){
   const svg=page.querySelector(':scope > .ink');svg.innerHTML='';page.querySelectorAll(':scope > .tbox').forEach(e=>e.remove());
   list.forEach(a=>{
-    if(a.type==='text'){const [ox,oy,u]=local(page,a),b=document.createElement('div');b.className='tbox';b.dataset.aid=a.id;b.style.left=ox+a.x*u+'px';b.style.top=oy+a.y*u+'px';b.style.color=a.color;b.textContent=a.text;
+    if(a.type==='text'){const [ox,oy,u]=local(page,a),b=document.createElement('div');b.className='tbox';b.dataset.aid=a.id;b.style.left=ox+a.x*u+'px';b.style.top=oy+a.y*u+'px';b.style.color=a.color;if(a.w){b.classList.add('fixw');b.style.width=a.w*u+'px'}b.textContent=a.text;
       if(live){try{b.contentEditable='plaintext-only'}catch(e){b.contentEditable='true'}b.spellcheck=false}page.appendChild(b);return}
     const p=document.createElementNS(SVGNS,'path');p.setAttribute('d',pathD(absPts(page,a)));p.setAttribute('stroke',a.color);p.setAttribute('stroke-width',a.type==='hl'?24:3.2);if(a.type==='hl')p.setAttribute('class','hl');svg.appendChild(p)});
 }
@@ -475,11 +478,12 @@ function attach(el,kind){
       const segs=[];let seg=[];for(let k=0;k<D.length;k++){if(Math.hypot(D[k][0]-p[0],D[k][1]-p[1])<r){if(seg.length>1)segs.push(seg);seg=[]}else seg.push(S[k])}if(seg.length>1)segs.push(seg);
       list.splice(i,1,...segs.map(g=>({...a,id:uid(),pts:g})));changed=true}
     return changed};
-  let cur=null,curPath=null,erasing=false,erased=false,drag=null;
+  let cur=null,curPath=null,erasing=false,erased=false,drag=null,rsz=null;
   el.addEventListener('pointerdown',e=>{
     if(mode!=='note')return;
     const p=pt(e),box=e.target.closest('.tbox');
     if(tool==='text'){
+      if(box&&e.clientX>box.getBoundingClientRect().right-16){snapshot();rsz={box,sx:e.clientX,ow:box.offsetWidth};el.setPointerCapture(e.pointerId);e.preventDefault();return}
       if(box){if(document.activeElement===box)return;drag={box,sx:e.clientX,sy:e.clientY,ox:box.offsetLeft,oy:box.offsetTop,moved:false};el.setPointerCapture(e.pointerId);e.preventDefault();return}
       if(isBox(document.activeElement)){document.activeElement.blur();e.preventDefault();return}
       e.preventDefault();snapshot();const an=anchor(p[0],p[1]),[ox,oy,u]=an.o;const a={id:uid(),type:'text',color:colorOf.text,...an.key,x:r4((p[0]-8-ox)/u),y:r4((p[1]-20-oy)/u),text:''};
@@ -492,12 +496,14 @@ function attach(el,kind){
     curPath.setAttribute('d',pathD(cur.raw));el.querySelector(':scope > .ink').appendChild(curPath);
   });
   el.addEventListener('pointermove',e=>{
+    if(rsz){const w=Math.max(60,rsz.ow+(e.clientX-rsz.sx)/K());rsz.box.classList.add('fixw');rsz.box.style.width=w+'px';return}
     if(drag){const dx=(e.clientX-drag.sx)/K(),dy=(e.clientY-drag.sy)/K();if(!drag.moved&&Math.hypot(dx,dy)<4)return;if(!drag.moved){drag.moved=true;snapshot()}
       drag.box.style.left=drag.ox+dx+'px';drag.box.style.top=drag.oy+dy+'px';return}
     if(erasing){if(eraseAt(pt(e))){erased=true;redraw()}return}
     if(!cur)return;const p=pt(e),q=cur.raw[cur.raw.length-1];if(Math.hypot(p[0]-q[0],p[1]-q[1])<2.5)return;cur.raw.push(p);curPath.setAttribute('d',pathD(cur.raw));
   });
   const end=e=>{
+    if(rsz){const r=rsz;rsz=null;const a=anns().find(x=>x.id===r.box.dataset.aid);if(a){const u=local(el,a)[2];a.w=r4(r.box.offsetWidth/u);save()}return}
     if(drag){const d=drag;drag=null;if(d.moved){const a=anns().find(x=>x.id===d.box.dataset.aid),an=anchor(d.box.offsetLeft+8,d.box.offsetTop+20),[ox,oy,u]=an.o;
         delete a.line;delete a.surf;Object.assign(a,an.key);a.x=r4((d.box.offsetLeft-ox)/u);a.y=r4((d.box.offsetTop-oy)/u);save()}else d.box.focus();return}
     if(erasing){erasing=false;if(erased)save();else undoStack.pop();return}
@@ -580,7 +586,7 @@ function paintDOM(root,ctx){const R=root.getBoundingClientRect(),range=document.
     const r=el.getBoundingClientRect(),x=r.left-R.left,y=r.top-R.top,rad=parseFloat(cs.borderTopLeftRadius)||0,bg=cs.backgroundColor;
     if(el!==root&&bg&&bg!=='rgba(0, 0, 0, 0)'&&bg!=='transparent'){ctx.fillStyle=bg;rr(ctx,x,y,r.width,r.height,rad);ctx.fill()}
     const bw=parseFloat(cs.borderTopWidth);if(el!==root&&bw>0&&cs.borderTopStyle!=='none'){ctx.strokeStyle=cs.borderTopColor;ctx.lineWidth=bw;rr(ctx,x+bw/2,y+bw/2,r.width-bw,r.height-bw,rad-bw/2);ctx.stroke()}
-    if(el.tagName==='IMG'){if(el.naturalWidth){const s=Math.max(r.width/el.naturalWidth,r.height/el.naturalHeight),sw=r.width/s,sh=r.height/s;ctx.save();rr(ctx,x,y,r.width,r.height,rad);ctx.clip();ctx.drawImage(el,(el.naturalWidth-sw)/2,(el.naturalHeight-sh)/2,sw,sh,x,y,r.width,r.height);ctx.restore()}return}
+    if(el.tagName==='IMG'){if(el.naturalWidth){if(cs.objectFit==='contain'){const s=Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight),w=el.naturalWidth*s,h=el.naturalHeight*s;ctx.drawImage(el,x+(r.width-w)/2,y+(r.height-h)/2,w,h);return}const s=Math.max(r.width/el.naturalWidth,r.height/el.naturalHeight),sw=r.width/s,sh=r.height/s;ctx.save();rr(ctx,x,y,r.width,r.height,rad);ctx.clip();ctx.drawImage(el,(el.naturalWidth-sw)/2,(el.naturalHeight-sh)/2,sw,sh,x,y,r.width,r.height);ctx.restore()}return}
     for(const n of el.childNodes){if(n.nodeType===3){if(n.data.trim()){ctx.globalAlpha=parseFloat(cs.opacity)||1;drawNode(ctx,n,cs,R.left,R.top,range);ctx.globalAlpha=1}}else if(n.nodeType===1)walk(n)}};
   walk(root)}
 function paintInk(ctx,page,list,k){const range=document.createRange(),pr=page.getBoundingClientRect();ctx.lineCap='round';ctx.lineJoin='round';
@@ -590,6 +596,8 @@ function paintInk(ctx,page,list,k){const range=document.createRange(),pr=page.ge
   page.querySelectorAll(':scope > .tbox').forEach(b=>{const x=b.offsetLeft,y=b.offsetTop,w=b.offsetWidth,h=b.offsetHeight;
     ctx.save();ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=10*k;ctx.shadowOffsetY=3*k;ctx.fillStyle='#fff';rr(ctx,x,y,w,h,10);ctx.fill();ctx.restore();
     if(b.firstChild)drawNode(ctx,b.firstChild,getComputedStyle(b),pr.left,pr.top,range)})}
+function wrapText(ctx,text,maxW){const out=[];text.split('\n').forEach(par=>{let line='';for(const ch of par.split(/(\s+)/)){const t=line+ch;if(line&&ctx.measureText(t.trimEnd()).width>maxW){out.push(line.trimEnd());line=ch.trimStart()}else line=t}
+  while(ctx.measureText(line).width>maxW&&line.length>1){let k=line.length;while(k>1&&ctx.measureText(line.slice(0,k)).width>maxW)k--;out.push(line.slice(0,k));line=line.slice(k)}out.push(line)});return out}
 const imgCache={};
 function loadImg(src){return imgCache[src]||(imgCache[src]=new Promise(res=>{const im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);im.src=src}))}
 async function pageCanvas(i,k){
@@ -604,7 +612,7 @@ async function pageCanvas(i,k){
     picAnn.filter(a=>a.type==='hl').forEach(a=>{ctx.globalCompositeOperation='multiply';ctx.globalAlpha=.55;ctx.strokeStyle=a.color;ctx.lineWidth=24;strokePts(ctx,P(a))});
     ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
     picAnn.filter(a=>a.type==='pen').forEach(a=>{ctx.strokeStyle=a.color;ctx.lineWidth=3.6;strokePts(ctx,P(a))});
-    picAnn.filter(a=>a.type==='text').forEach(a=>{ctx.font='700 28px "Arial Rounded MT Bold","Baloo 2","PingFang SC","Microsoft YaHei",sans-serif';const ls=a.text.split('\n'),w=Math.max(...ls.map(t=>ctx.measureText(t).width))+28,h=ls.length*35+8,x=a.x*PW,y=a.y*PW;
+    picAnn.filter(a=>a.type==='text').forEach(a=>{ctx.font='700 28px "Arial Rounded MT Bold","Baloo 2","PingFang SC","Microsoft YaHei",sans-serif';const ls=wrapText(ctx,a.text,a.w?a.w*PW-28:492),w=Math.min(PW-8,a.w?a.w*PW:Math.max(...ls.map(t=>ctx.measureText(t).width))+28),h=ls.length*35+8,x=Math.max(4,Math.min(a.x*PW,PW-w-4)),y=a.y*PW;
       ctx.save();ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=10*k;ctx.shadowOffsetY=3*k;ctx.fillStyle='#fff';rr(ctx,x,y,w,h,10);ctx.fill();ctx.restore();
       ctx.fillStyle=a.color;ctx.textBaseline='middle';ls.forEach((t,n)=>ctx.fillText(t,x+14,y+4+35*n+18))})}
   ctx.save();ctx.translate(0,top);
@@ -627,8 +635,8 @@ function makePDF(pages){ // pages: [{data:Uint8Array(JPEG), w, h}], each one a f
   push('%PDF-1.4\n');const N=pages.length;
   obj(1,()=>push('<< /Type /Catalog /Pages 2 0 R >>'));
   obj(2,()=>push('<< /Type /Pages /Kids ['+pages.map((p,i)=>(3+i*3)+' 0 R').join(' ')+'] /Count '+N+' >>'));
-  pages.forEach((j,i)=>{const p=3+i*3,cs='q 595 0 0 842 0 0 cm /Im0 Do Q';
-    obj(p,()=>push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /XObject << /Im0 ${p+2} 0 R >> >> /Contents ${p+1} 0 R >>`));
+  pages.forEach((j,i)=>{const p=3+i*3,L=j.w>j.h,PWd=L?842:595,PHd=L?595:842,cs=`q ${PWd} 0 0 ${PHd} 0 0 cm /Im0 Do Q`;
+    obj(p,()=>push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PWd} ${PHd}] /Resources << /XObject << /Im0 ${p+2} 0 R >> >> /Contents ${p+1} 0 R >>`));
     obj(p+1,()=>push(`<< /Length ${cs.length} >>\nstream\n${cs}\nendstream`));
     obj(p+2,()=>{push(`<< /Type /XObject /Subtype /Image /Width ${j.w} /Height ${j.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${j.data.length} >>\nstream\n`);push(j.data);push('\nendstream')})});
   const xref=pos,total=3+N*3;push('xref\n0 '+total+'\n0000000000 65535 f \n');for(let n=1;n<total;n++)push(String(offs[n]).padStart(10,'0')+' 00000 n \n');
@@ -653,6 +661,18 @@ async function buildPDF(){
   const jp=pages.map(pc=>{const bin=atob(pc.toDataURL('image/jpeg',.9).split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return {data:u,w:pc.width,h:pc.height}});
   return makePDF(jp);
 }
+async function retellPDF(){
+  if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  const A=[1754,1240],M=60,ZH='"PingFang SC","Microsoft YaHei",sans-serif',en=document.body.classList.contains('en');
+  const c=document.createElement('canvas');c.width=A[0];c.height=A[1];const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,A[0],A[1]);ctx.textBaseline='top';
+  ctx.fillStyle='#35522b';ctx.font='700 40px '+ZH;ctx.fillText(en?DATA.story+' · Retell':DATA.story+' '+DATA.storyZh+' · Retell 复述',M,M);
+  ctx.fillStyle='#7b5431';ctx.font='500 24px '+ZH;ctx.textAlign='right';ctx.fillText(en?'Name: ____________   Date: ________':'Name: ____________   Date: ________',A[0]-M,M+10);ctx.textAlign='left';
+  const im=await boardCanvas('retell',2),top=M+66,W=A[0]-M*2,H=A[1]-top-M;let w=W,h=im.height*W/im.width;if(h>H){w=w*H/h;h=H}const x=(A[0]-w)/2;
+  ctx.save();rr(ctx,x,top,w,h,18);ctx.clip();ctx.drawImage(im,x,top,w,h);ctx.restore();ctx.strokeStyle='#e2d6b8';ctx.lineWidth=2;rr(ctx,x,top,w,h,18);ctx.stroke();
+  const bin=atob(c.toDataURL('image/jpeg',.92).split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
+  return makePDF([{data:u,w:c.width,h:c.height}])}
+$('rpdf').onclick=async()=>{if(isBox(document.activeElement))document.activeElement.blur();toast('正在生成复述 PDF…');const blob=await retellPDF();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=DATA.story+' Retell '+store.current+' '+today()+'.pdf';document.body.appendChild(a);a.click();a.remove();toast('复述 PDF 已保存到“下载”文件夹')};
 $('pdf').onclick=async()=>{if(isBox(document.activeElement))document.activeElement.blur();if(!notedBlocks().length)return toast('还没有笔记：先切到 Note 圈画或打字');
   toast('正在生成 PDF…');const blob=await buildPDF();const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=DATA.story+' 课堂笔记 '+store.current+' '+today()+'.pdf';document.body.appendChild(a);a.click();a.remove();toast('PDF 已保存到“下载”文件夹')};
 
