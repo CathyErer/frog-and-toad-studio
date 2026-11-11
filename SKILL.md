@@ -92,6 +92,7 @@ for i, page in enumerate(pdf):
 - **核心 inference 问题**（Why did …? 一课一个，笑点藏在"说的和做的不一致"里）
 - **关键词复述线**：场景小标题 + emoji 开头的 bullet + **加粗关键词** + 简短逐字引文
 - **动词词库**（6 个，供 Workbook 填空）+ **寓意填空**（2 个空）
+- **Useful Chunks**：每课从整篇故事挑 8 个固定搭配，默认 5 个可迁移的 `CORE` + 3 个理解／复述所需的 `STORY`；每条都要有中文解释、原书句和自然理解句。完整格式见 [references/useful-chunks-format.md](references/useful-chunks-format.md)。
 
 若用户上传了手绘关键词地图，以用户的图为准挑关键词。
 
@@ -99,7 +100,7 @@ for i, page in enumerate(pdf):
 
 **复制 `<SKILL_DIR>/assets/template_keyword_map.html`，只换内容，绝不发明新版式。**
 五个 tab 固定：① Warm-up 读前（3 张 q-card：聊自己→标题猜想→带问题读）
-② Vocabulary 10 个核心词汇（英文解释 + 中文解释 + 例句）
+② Vocabulary（默认显示 10 个 Story Words，可切换到 8 个 Useful Chunks）
 ③ The Story Map 复述路线 ④ Characters 人物+情绪线 ⑤ Theme 寓意。
 
 版式部件（按故事结构选用）：
@@ -112,8 +113,10 @@ for i, page in enumerate(pdf):
 语言规则：中文都放 `<span class="zh">` 里（EN only 按钮会隐藏）；正文关键词式精简；
 标题区 moral-tag = 寓意；footer 写 Lesson N。
 词汇规则：Vocabulary tab 的主数据来自 Obsidian `0N - <Book> 关键词地图.md` 中每课的
-`10 个词汇（中英解释 + 例句）` 模块；本地同步脚本为
+`10 个词汇（中英解释 + 例句）` 和 `Useful Chunks（8 个固定搭配）` 模块；本地同步脚本为
 `<SKILL_DIR>/scripts/sync_vocabulary_to_html.py`。
+
+Useful Chunks 的原书句直接显示，不加 `In the story:`。理解句使用 `Try it:`，通过两三句自然小情境解释意义；不设 `How to use`，也不机械重复 `That means ...`。中文解释必须放在 `.zh` 中，EN only 时隐藏；切换按钮必须同步更新 `aria-selected`。
 
 **自检**：Python HTMLParser 做标签平衡检查（历史上每次都查）。
 
@@ -124,7 +127,7 @@ for i, page in enumerate(pdf):
 三列固定表格、红色答案、无 emoji）。四个 Part 固定：
 Story Map 填动词（6 行，cue 逐字引文）→ Think! 推断题 → 寓意填空（2 空）→ Draw! 画图框+一句话。
 
-**自检**：soffice 转 PDF 断言**每个文件恰好 1 页**（超页就精简 cue/closing 文字）。
+**自检**：soffice 转 PDF 断言**每个文件恰好 1 页**（超页就精简 cue/closing 文字），并确认 Student 与答案版底部均显示 `Page 1`。
 
 ### 5. 逐字核对
 
@@ -171,14 +174,18 @@ Story Map 填动词（6 行，cue 逐字引文）→ Think! 推断题 → 寓意
 - `<SKILL_DIR>/assets/template_keyword_map.html` — 锁定的 HTML 模板（Spring 成品，含 .four/.five CSS）
 - `<SKILL_DIR>/scripts/make_workbooks.py` — Workbook 生成器 + EXAMPLE config
 - `<SKILL_DIR>/scripts/sync_vocabulary_to_html.py` — 从 Obsidian 关键词地图同步 Vocabulary tab 到 20 个 HTML
+- `<SKILL_DIR>/scripts/audit_useful_chunks.py` — 全量检查 20 课的 10+8 卡片、5+3 分类、禁用标签、HTML 平衡和图片路径
+- `<SKILL_DIR>/references/useful-chunks-format.md` — 8 个固定搭配的选取、解释、Obsidian 结构和 QA 合同
 - `<SKILL_DIR>/references/course-map.md` — 全系列 20 课总表（寓意/思考题/动词词库），改总结或补课时查这里
 - `<SKILL_DIR>/skills/frog-and-toad-illustration-style/` — 插画子 skill：画风规则 + 20 章提示词库（prompts/）+ 插图注入关键词地图 HTML 的锁定版式
 
 ## 交付清单（每章完成前过一遍）
 
 - [ ] 关键词列表已经用户确认
-- [ ] HTML 标签平衡，route 段都包了 span，中文都在 .zh 里，Vocabulary tab 有 10 个词汇卡
+- [ ] HTML 标签平衡，route 段都包了 span，中文都在 .zh 里；Vocabulary tab 有 10 个 Story Words、8 个 Useful Chunks（5 CORE + 3 STORY）
+- [ ] Story Words / Useful Chunks 与 EN only / 中英均可切换；固定搭配卡不出现 `In the story:`、`How to use` 或机械重复的 `That means`
 - [ ] Workbook + 答案版都是 1 页；答案红粗下划线；无 emoji
+- [ ] Workbook + 答案版每页都有可见页码
 - [ ] 所有引文与原书逐字一致
 - [ ] 章节文件夹三件套齐全，命名 `0M - <Chapter> …`
 - [ ] Obsidian 两个笔记已更新

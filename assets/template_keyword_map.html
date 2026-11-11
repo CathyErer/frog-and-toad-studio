@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spring · Frog and Toad Are Friends</title>
+<!-- contentVersion: 2026-09-02-template-useful-chunks-v1; bump when copied -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Patrick+Hand&display=swap');
 
@@ -163,6 +164,18 @@ h2.sec::after{
   padding:18px 24px; background:var(--frog-wash); transform:rotate(-.3deg);
   font-size:1.35rem; font-weight:800; line-height:1.6; margin-bottom:16px;
 }
+
+/* generated story illustrations */
+.mishap .m .ic.img-ic{font-size:0; margin-bottom:8px;}
+.mishap .m .ic.img-ic img{
+  width:96px; height:96px; object-fit:cover; mix-blend-mode:multiply;
+  display:block; margin:0 auto; border-radius:16px; background:#fffdf4;
+}
+.feel-stop .emo img{
+  width:100%; height:100%; object-fit:cover; mix-blend-mode:multiply;
+  display:block; border-radius:50%;
+}
+
 .gold{
   margin-top:22px; padding:18px 24px; background:var(--sun); color:#fff;
   transform:rotate(-.5deg);
@@ -242,6 +255,28 @@ h2.sec::after{
 .vocab-card h3{font-size:1.45rem;color:var(--frog-deep);line-height:1.1;margin-bottom:8px;}
 .vocab-card p{font-size:1.06rem;line-height:1.45;font-weight:650;margin:5px 0;}
 .vocab-card .example{font-family:"Patrick Hand","PingFang SC",cursive;font-size:1.18rem;color:var(--toad-deep);}
+.vocab-switcher{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 20px;}
+.vocab-mode{font-family:inherit;font-size:1.12rem;font-weight:800;color:var(--ink);background:#fffdf4;border:3px solid var(--ink);border-radius:225px 14px 255px 14px / 14px 255px 14px 225px;padding:9px 20px;cursor:pointer;box-shadow:var(--shadow);}
+.vocab-mode:nth-child(odd){transform:rotate(-.5deg);}
+.vocab-mode:nth-child(even){transform:rotate(.5deg);}
+.vocab-mode.active{color:#fff;background:var(--frog);border-color:var(--frog-deep);}
+.vocab-panel{display:none;}
+.vocab-panel.show{display:block;animation:pop .25s ease;}
+.chunk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+@media(max-width:860px){.chunk-grid{grid-template-columns:1fr;}}
+.chunk-card{position:relative;padding:20px 22px 18px;min-height:250px;background:#fffdf4;}
+.chunk-card:nth-child(4n+1){background:var(--frog-wash);transform:rotate(-.25deg);}
+.chunk-card:nth-child(4n+2){background:var(--toad-wash);transform:rotate(.25deg);}
+.chunk-card:nth-child(4n+3){background:#fff8e9;transform:rotate(.15deg);}
+.chunk-card:nth-child(4n+4){background:#f3f0df;transform:rotate(-.15deg);}
+.chunk-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;}
+.chunk-card h3{color:var(--frog-deep);font-size:1.5rem;line-height:1.2;}
+.chunk-level{flex:0 0 auto;padding:3px 10px;color:#fff;background:var(--toad-deep);border:2px solid var(--ink);border-radius:999px;font-size:.78rem;font-weight:800;letter-spacing:.04em;}
+.chunk-level.story{background:var(--sun-deep);}
+.chunk-meaning{font-size:1.05rem;font-weight:700;line-height:1.45;margin:7px 0 11px;}
+.chunk-line{padding:9px 12px;margin-top:8px;background:rgba(255,253,244,.88);border-left:5px solid var(--frog);border-radius:7px;font-size:1.05rem;font-weight:650;line-height:1.5;}
+.chunk-line.try{border-left-color:var(--sun);font-family:"Patrick Hand","PingFang SC",cursive;font-size:1.16rem;}
+.chunk-line b{color:var(--toad-deep);}
 
 footer{
   text-align:center; margin-top:40px;
@@ -291,9 +326,14 @@ footer{
 
 <!-- ② vocabulary: replace all ten cards with the confirmed chapter vocabulary -->
 <section class="tab" id="vocab">
-  <h2 class="sec">Vocabulary <span class="zh">10 个核心词汇</span></h2>
-  <p class="hint">Read the word, say the meaning, then make your own sentence. <span class="zh">读词 → 说意思 → 造句。EN only 会隐藏中文解释。</span></p>
-  <div class="vocab-grid">
+  <h2 class="sec">Vocabulary <span class="zh">故事词汇 + 固定搭配</span></h2>
+  <p class="hint">Choose a set. Learn the story words, then meet each useful chunk in a real situation. <span class="zh">选择一组：先学故事词汇，再用自然的小情境理解整块语言。</span></p>
+  <div class="vocab-switcher" role="tablist" aria-label="Vocabulary sets">
+    <button class="vocab-mode active" data-vocab-view="words" role="tab" aria-selected="true">Story Words <span class="zh">10 个故事词汇</span></button>
+    <button class="vocab-mode" data-vocab-view="chunks" role="tab" aria-selected="false">Useful Chunks <span class="zh">8 个固定搭配</span></button>
+  </div>
+  <div class="vocab-panel show" data-vocab-panel="words" role="tabpanel">
+    <div class="vocab-grid">
     <div class="vocab-card wob"><div class="vocab-num">01</div><h3>spring</h3><p><b>EN:</b> the season after winter.</p><p><span class="zh"><b>中文：</b>春天</span></p><p class="example">Example: It is spring now.</p></div>
     <div class="vocab-card wob"><div class="vocab-num">02</div><h3>wake up</h3><p><b>EN:</b> stop sleeping.</p><p><span class="zh"><b>中文：</b>醒来</span></p><p class="example">Example: Frog told Toad to wake up.</p></div>
     <div class="vocab-card wob"><div class="vocab-num">03</div><h3>sleepy</h3><p><b>EN:</b> ready or wanting to sleep.</p><p><span class="zh"><b>中文：</b>困倦的</span></p><p class="example">Example: Toad felt sleepy.</p></div>
@@ -304,6 +344,19 @@ footer{
     <div class="vocab-card wob"><div class="vocab-num">08</div><h3>calendar</h3><p><b>EN:</b> a chart that shows days and months.</p><p><span class="zh"><b>中文：</b>日历</span></p><p class="example">Example: Frog looked at the calendar.</p></div>
     <div class="vocab-card wob"><div class="vocab-num">09</div><h3>tore off</h3><p><b>EN:</b> pulled something away by tearing.</p><p><span class="zh"><b>中文：</b>撕掉</span></p><p class="example">Example: He tore off a piece of paper.</p></div>
     <div class="vocab-card wob"><div class="vocab-num">10</div><h3>lonely</h3><p><b>EN:</b> sad because you are alone.</p><p><span class="zh"><b>中文：</b>孤单的</span></p><p class="example">Example: Frog did not want to feel lonely.</p></div>
+    </div>
+  </div>
+  <div class="vocab-panel" data-vocab-panel="chunks" role="tabpanel">
+    <div class="chunk-grid">
+      <article class="chunk-card wob"><div class="chunk-top"><h3>run up the path to someone's house</h3><span class="chunk-level story">STORY</span></div><p class="chunk-meaning zh">沿着小路跑向某人的家。</p><p class="chunk-line">Frog ran up the path to Toad's house.</p><p class="chunk-line try"><b>Try it:</b> I see my friend at the door. I run up the path to her house.</p></article>
+      <article class="chunk-card wob"><div class="chunk-top"><h3>knock on the front door</h3><span class="chunk-level">CORE</span></div><p class="chunk-meaning zh">敲前门。</p><p class="chunk-line">He knocked on the front door.</p><p class="chunk-line try"><b>Try it:</b> I knock on the front door and wait for Grandma.</p></article>
+      <article class="chunk-card wob"><div class="chunk-top"><h3>there was no answer</h3><span class="chunk-level">CORE</span></div><p class="chunk-meaning zh">没有人回应。</p><p class="chunk-line">There was no answer.</p><p class="chunk-line try"><b>Try it:</b> I call Ben's name, but there is no answer. He may be outside.</p></article>
+      <article class="chunk-card wob"><div class="chunk-top"><h3>pull all the covers over your head</h3><span class="chunk-level story">STORY</span></div><p class="chunk-meaning zh">把所有被子拉过头顶，把自己蒙起来。</p><p class="chunk-line">He had pulled all the covers over his head.</p><p class="chunk-line try"><b>Try it:</b> The room is cold. I pull all the covers over my head.</p></article>
+      <article class="chunk-card wob"><div class="chunk-top"><h3>a whole new year together</h3><span class="chunk-level">CORE</span></div><p class="chunk-meaning zh">一起度过完整的新一年。</p><p class="chunk-line">&ldquo;And it means that we can begin a whole new year together, Toad.&rdquo;</p><p class="chunk-line try"><b>Try it:</b> School begins today. My friends and I can have a whole new year together.</p></article>
+      <article class="chunk-card wob"><div class="chunk-top"><h3>count the stars</h3><span class="chunk-level">CORE</span></div><p class="chunk-meaning zh">数星星。</p><p class="chunk-line">&ldquo;In the evenings we will sit right here on this front porch and count the stars.&rdquo;</p><p class="chunk-line try"><b>Try it:</b> The sky is clear tonight. We sit outside and count the stars.</p></article>
+      <article class="chunk-card wob"><div class="chunk-top"><h3>go back to bed</h3><span class="chunk-level">CORE</span></div><p class="chunk-meaning zh">回到床上继续睡觉或休息。</p><p class="chunk-line">&ldquo;I am going back to bed.&rdquo;</p><p class="chunk-line try"><b>Try it:</b> I still feel sick, so I go back to bed and rest.</p></article>
+      <article class="chunk-card wob"><div class="chunk-top"><h3>at about half past May</h3><span class="chunk-level story">STORY</span></div><p class="chunk-meaning zh">大约在五月过了一半的时候，是故事里的幽默说法。</p><p class="chunk-line">&ldquo;Come back again and wake me up at about half past May.&rdquo;</p><p class="chunk-line try"><b>Try it:</b> Toad wants to sleep for many more weeks. He says, &ldquo;Wake me at about half past May.&rdquo;</p></article>
+    </div>
   </div>
 </section>
 
@@ -439,6 +492,18 @@ const langBtn=document.getElementById('langBtn');
 langBtn.addEventListener('click',()=>{
   document.body.classList.toggle('en-only');
   langBtn.textContent=document.body.classList.contains('en-only')?'中英':'EN only';
+});
+document.querySelectorAll('.vocab-mode').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.vocab-mode').forEach(b=>{
+      b.classList.remove('active');
+      b.setAttribute('aria-selected','false');
+    });
+    document.querySelectorAll('.vocab-panel').forEach(panel=>panel.classList.remove('show'));
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+    document.querySelector(`[data-vocab-panel="${btn.dataset.vocabView}"]`).classList.add('show');
+  });
 });
 </script>
 </body>

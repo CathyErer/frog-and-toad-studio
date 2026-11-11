@@ -20,7 +20,7 @@ House rules baked in:
 """
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
-from docx.enum.text import WD_TAB_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
@@ -60,12 +60,30 @@ def mixed(par, parts, size=12, base_bold=False):
         r = par.add_run(text)
         set_font(r, size, bold=base_bold or is_ans, red=bool(is_ans))
 
+def add_page_number(doc):
+    footer = doc.sections[0].footer
+    p = footer.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after = Pt(0)
+    prefix = p.add_run("Page "); set_font(prefix, 9)
+    prefix.font.color.rgb = RGBColor(0x88, 0x88, 0x88)
+    r = p.add_run(); set_font(r, 9)
+    r.font.color.rgb = RGBColor(0x88, 0x88, 0x88)
+    begin = OxmlElement('w:fldChar'); begin.set(qn('w:fldCharType'), 'begin')
+    instr = OxmlElement('w:instrText'); instr.set(qn('xml:space'), 'preserve'); instr.text = ' PAGE '
+    sep = OxmlElement('w:fldChar'); sep.set(qn('w:fldCharType'), 'separate')
+    cached = OxmlElement('w:t'); cached.text = '1'
+    end = OxmlElement('w:fldChar'); end.set(qn('w:fldCharType'), 'end')
+    r._r.extend([begin, instr, sep, cached, end])
+
 def build(cfg, A, path):
     doc = Document()
     s = doc.sections[0]
     s.page_width, s.page_height = Inches(8.5), Inches(11)
     s.top_margin = s.bottom_margin = Inches(0.5)
     s.left_margin = s.right_margin = Inches(1.0)
+    add_page_number(doc)
 
     def blank_or(word):
         return (f" {word} ", 1) if A else ("______________", 0)
