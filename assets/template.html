@@ -154,7 +154,7 @@ body.kw-hide .rcard:not(.show) .kwrow{visibility:hidden}
 .ink path.hl{mix-blend-mode:multiply;opacity:.55}
 .tbox{position:absolute;min-width:36px;width:max-content;max-width:520px;box-sizing:border-box;padding:4px 14px;background:#fff;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.22);font:700 28px/1.25 "Arial Rounded MT Bold","Baloo 2","PingFang SC","Microsoft YaHei",sans-serif;white-space:pre-wrap;outline:none;pointer-events:none;-webkit-user-select:text;user-select:text}
 .tbox:focus{box-shadow:0 0 0 2px var(--olive),0 3px 10px rgba(0,0,0,.22)}
-body.m-note #page,body.m-note .left,body.m-note .board{touch-action:none;-webkit-user-select:none;user-select:none}
+body.m-note:not(.t-mouse) #page,body.m-note:not(.t-mouse) .left,body.m-note:not(.t-mouse) .board{touch-action:none;-webkit-user-select:none;user-select:none}
 body.m-note.t-text .tbox{pointer-events:auto}
 .tbox.fixw{max-width:none}
 body.m-note.t-text .tbox::after{content:"";position:absolute;right:-7px;top:50%;width:8px;height:26px;margin-top:-13px;border-radius:5px;background:var(--olive);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25);cursor:ew-resize}
@@ -178,6 +178,7 @@ body.v-retell .kwbtn{display:block}
 .pens{display:none;align-items:center;gap:6px;flex-wrap:wrap}
 body.m-note .pens{display:flex}
 body.m-note .play{display:none}
+@media (max-width:1560px){#wipe .lbl,#wipeall .lbl{display:none}.pens{gap:5px}}
 .tool.arm{background:#d0342c !important;color:#fff !important}
 .tool{height:40px;min-width:40px;padding:0 10px;border-radius:12px;background:var(--chip,#efe6cd);font-weight:700;font-size:15px;color:var(--brown);border:2px solid transparent}
 .tool.on{background:#fff;border-color:var(--olive);color:var(--olive)}
@@ -197,7 +198,7 @@ body.m-note .play{display:none}
 /* big, easy-to-see cursors (set from JS) */
 *{cursor:var(--arrow,auto) !important}
 .tbox:focus{cursor:text !important}
-body.m-note #page,body.m-note #page *,body.m-note .left,body.m-note .left *,body.m-note .board,body.m-note .board *{cursor:var(--toolcur,crosshair) !important}
+body.m-note:not(.t-mouse) #page,body.m-note:not(.t-mouse) #page *,body.m-note:not(.t-mouse) .left,body.m-note:not(.t-mouse) .left *,body.m-note:not(.t-mouse) .board,body.m-note:not(.t-mouse) .board *{cursor:var(--toolcur,crosshair) !important}
 body.m-note.t-text .tbox:not(:focus){cursor:move !important}
 @media (max-width:1250px){.lbl{display:none}header{gap:10px}.brand h1{font-size:24px}select.pill{max-width:104px}.pill{padding:6px 10px}.dot{width:30px !important;height:30px !important}.dots{gap:4px !important}header{padding:10px 14px}.dots{gap:5px}.dot{width:32px;height:32px;font-size:15px}.think .tip{display:none}.view{padding:6px 10px;font-size:14px}}
 @media (max-width:860px){.dots{order:3;flex-basis:100%}.tools{flex-wrap:wrap;justify-content:flex-end}.pill{padding:5px 10px;font-size:13px}body{overflow:auto}main{grid-template-columns:1fr;grid-template-rows:auto;padding:4px 12px 12px}.left,.right,.stage,.bar{grid-column:1;grid-row:auto}.pic{aspect-ratio:4/3;flex:none;max-height:none}.right{min-height:60vh}.stage{height:56vw}header{flex-wrap:wrap;padding:8px 12px}}
@@ -243,6 +244,7 @@ body.m-note.t-text .tbox:not(:focus){cursor:move !important}
     <button class="kwbtn" id="kw">Hide keywords</button>
     <button class="kwbtn" id="rpdf" title="只把复述这一页存成 PDF（横向 A4，所见即所得）"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg> Retell PDF</button>
     <div class="pens" id="pens">
+      <button class="tool" data-t="mouse" title="鼠标：不画也不写，像平时一样点句子、点题目；笔记照样显示（快捷键 Esc）"><svg class="ic" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.5L10 19z"/><path d="M13 12.5l4 6"/></svg> Mouse</button>
       <button class="tool on" data-t="pen" title="画笔：圈、划线、箭头"><svg class="ic" viewBox="0 0 24 24"><path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M14 6l4 4"/></svg> Pen</button>
       <button class="tool" data-t="hl" title="荧光笔"><svg class="ic" viewBox="0 0 24 24"><path d="M9 14l6-9 4 3-6 9z"/><path d="M9 14l-2 4 4 1 2-2"/><path d="M4 21h8"/></svg> Highlight</button>
       <button class="tool" data-t="text" title="点一下空白处打字；按住文字框可拖动">T Text</button>
@@ -360,7 +362,7 @@ function fitCards(b){b.querySelectorAll('.rcard').forEach(c=>{const rk=c.querySe
   while(fs>11&&rk.scrollHeight>rk.clientHeight+1){fs-=.5;c.style.setProperty('--fs',fs+'px')}})}
 function fitBoard(){const b=$('board');if(!b)return;const st=$('stage');bscale=Math.min(st.clientWidth/BW,st.clientHeight/BH);b.style.transform='scale('+bscale+')';b.style.left=(st.clientWidth-BW*bscale)/2+'px'}
 function showBoard(){const b=buildBoard(view,false);b.id='board';$('stage').innerHTML='';$('stage').appendChild(b);if(DECOR.length){const h=[...String(view)].reduce((x,c)=>x+c.charCodeAt(0),0);['d3'].forEach((c,j)=>{const m=document.createElement('img');m.className='deco '+c;m.src=deco(h+j*3);m.draggable=false;b.appendChild(m)})}attach(b,'board');
-  b.addEventListener('click',e=>{if(mode==='note')return;const T=e.target;
+  b.addEventListener('click',e=>{if(drawing())return;const T=e.target;
     if(T.closest('.find')){const ids=view==='quiz'?DATA.quiz[sub.quiz].evidence:DATA.theme.evidence;scene=lineById[ids[0]].scene;setView('read');showEvidence(ids,false);return}
     if(T.closest('[data-sub]')){sub[view]=+T.closest('[data-sub]').dataset.sub;undoStack=[];showBoard();return}
     const wc=T.closest('.wcard');if(wc){document.querySelectorAll('.wcard.say').forEach(x=>x.classList.remove('say'));wc.classList.add('say');sayWord(wc.dataset.say);return}
@@ -480,7 +482,7 @@ function attach(el,kind){
     return changed};
   let cur=null,curPath=null,erasing=false,erased=false,drag=null,rsz=null;
   el.addEventListener('pointerdown',e=>{
-    if(mode!=='note')return;
+    if(!drawing())return;
     const p=pt(e),box=e.target.closest('.tbox');
     if(tool==='text'){
       if(box&&e.clientX>box.getBoundingClientRect().right-16){snapshot();rsz={box,sx:e.clientX,ow:box.offsetWidth};el.setPointerCapture(e.pointerId);e.preventDefault();return}
@@ -518,12 +520,12 @@ function attach(el,kind){
   el.addEventListener('focusout',e=>{const b=e.target.closest&&e.target.closest('.tbox');if(!b)return;const list=anns(),i=list.findIndex(x=>x.id===b.dataset.aid);
     if(i>=0&&!list[i].text.trim()){list.splice(i,1);b.remove();save()}});
   if(kind==='page')el.addEventListener('click',e=>{
-    if(mode==='note')return;const line=e.target.closest('.line'),w=e.target.closest('.w');
+    if(drawing())return;const line=e.target.closest('.line'),w=e.target.closest('.w');
     if(mode==='word'){if(w)wordTap(w);else hideBubble();return}
-    if(line&&mode==='sentence')playLine(line.dataset.lid)});
+    if(line&&(mode==='sentence'||mode==='note'))playLine(line.dataset.lid)});
 }
 attach(LEFT,'left');
-function setTool(t){tool=t;document.body.classList.remove('t-pen','t-hl','t-text','t-erase');document.body.classList.add('t-'+t);
+function setTool(t){tool=t;document.body.classList.remove('t-pen','t-hl','t-text','t-erase','t-mouse');document.body.classList.add('t-'+t);
   $('pens').querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===t));if(t!=='text'&&isBox(document.activeElement))document.activeElement.blur();syncSw()}
 const curURL=(svg,x,y,fb)=>`url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">'+svg+'</svg>')}") ${x} ${y}, ${fb}`;
 document.body.style.setProperty('--arrow',curURL('<circle cx="15" cy="15" r="14" fill="#ffab2e" fill-opacity=".5"/><path d="M15 15v27l7-7 5 11 6-3-5-10h10z" fill="#111" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/>',15,15,'auto'));
@@ -533,8 +535,8 @@ function syncCursor(){const c=colorOf[tool]||'#d0342c';let v;
   else if(tool==='text')v=curURL(`<path d="M15 7h7q2 0 2 2 0-2 2-2h7M15 41h7q2 0 2-2 0 2 2 2h7M24 9v30" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/><path d="M15 7h7q2 0 2 2 0-2 2-2h7M15 41h7q2 0 2-2 0 2 2 2h7M24 9v30" fill="none" stroke="${c}" stroke-width="3.2" stroke-linecap="round"/>`,24,24,'text');
   else v=curURL('<circle cx="13" cy="35" r="12" fill="#fff" fill-opacity=".45" stroke="#8A6A45" stroke-width="1.6" stroke-dasharray="3 3"/><g transform="rotate(-40 24 24)"><rect x="4" y="15" width="40" height="18" rx="5" fill="#F4A8A0" stroke="#fff" stroke-width="2.6"/><rect x="18" y="15" width="26" height="18" rx="5" fill="#5B8FCB"/><rect x="18" y="15" width="6" height="18" fill="#F6F1E4"/><rect x="4" y="15" width="40" height="18" rx="5" fill="none" stroke="#5a4630" stroke-width="1.4"/></g>',13,35,'cell');
   document.body.style.setProperty('--toolcur',v)}
-function syncSw(){syncCursor();[...$('sws').children].forEach(b=>b.classList.toggle('on',b.dataset.c===colorOf[tool]));$('sws').style.opacity=tool==='erase'?.35:1}
-COLORS.forEach(c=>{const b=document.createElement('button');b.className='sw';b.style.background=c;b.dataset.c=c;b.title='颜色';b.onclick=()=>{if(tool==='erase')return;colorOf[tool]=c;syncSw()};$('sws').appendChild(b)});
+function syncSw(){syncCursor();[...$('sws').children].forEach(b=>b.classList.toggle('on',b.dataset.c===colorOf[tool]));$('sws').style.opacity=tool==='erase'||tool==='mouse'?.35:1}
+COLORS.forEach(c=>{const b=document.createElement('button');b.className='sw';b.style.background=c;b.dataset.c=c;b.title='颜色';b.onclick=()=>{if(tool==='erase'||tool==='mouse')return;colorOf[tool]=c;syncSw()};$('sws').appendChild(b)});
 $('pens').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b)setTool(b.dataset.t)});
 let allBackup=null,armAll=0;
 $('wipeall').onclick=()=>{const p=prof(),n=Object.values(p.ann).reduce((x,l)=>x+(l||[]).length,0);if(!n)return toast('这个班级还没有笔记');
@@ -545,6 +547,7 @@ $('wipe').onclick=()=>{if(!anns().length)return;snapshot();prof().ann[curKey()]=
 
 /* ---------- interactions ---------- */
 document.addEventListener('click',e=>{if(!e.target.closest('.w')&&!e.target.closest('#bubble'))hideBubble()});
+const drawing=()=>mode==='note'&&tool!=='mouse';
 function setMode(m){mode=m;document.body.classList.remove('m-sentence','m-word','m-note');document.body.classList.add('m-'+m);
   [...$('modes').children].forEach(b=>b.classList.toggle('on',b.dataset.m===m));hideBubble();if(m!=='sentence')stop();
   if(m==='note'){document.body.classList.remove('hide-notes');syncEye()}else if(isBox(document.activeElement))document.activeElement.blur();
@@ -559,12 +562,12 @@ function showEvidence(ids,play){document.querySelectorAll('#page .line.ev').forE
   const els=ids.map(id=>$('page').querySelector('[data-lid="'+id+'"]')).filter(Boolean);els.forEach(e=>e.classList.add('ev'));
   if(els[0])els[0].scrollIntoView({block:'center',behavior:'smooth'});
   if(play){const here=ids.filter(id=>$('page').querySelector('[data-lid="'+id+'"]')).map(id=>lineById[id]).sort((a,b)=>(a.end-a.start)-(b.end-b.start))[0];if(here){clearTimeout(evTimer);evTimer=setTimeout(()=>playLine(here.id),450)}}}
-$('think').onclick=()=>{if(mode==='note')return;const o=$('think').classList.toggle('open');if(o)showEvidence(DATA.scenes[scene].evidence,false);else{stop();showEvidence([])}};
+$('think').onclick=()=>{if(drawing())return;const o=$('think').classList.toggle('open');if(o)showEvidence(DATA.scenes[scene].evidence,false);else{stop();showEvidence([])}};
 function syncEye(){const h=document.body.classList.contains('hide-notes');$('eye').innerHTML=h?'<svg class="ic" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="lbl"> Show notes</span>':'<svg class="ic" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg><span class="lbl"> Hide notes</span>';$('eye').classList.toggle('on',h)}
 $('eye').onclick=()=>{if(mode==='note')setMode('sentence');document.body.classList.toggle('hide-notes');syncEye()};
 $('full').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()};
 document.addEventListener('keydown',e=>{if(e.target.isContentEditable){if(e.key==='Escape')e.target.blur();return}
-  if(view==='read'&&e.key==='ArrowRight')go(scene+1);else if(view==='read'&&e.key==='ArrowLeft')go(scene-1);else if(e.key==='Escape')hideBubble();
+  if(view==='read'&&e.key==='ArrowRight')go(scene+1);else if(view==='read'&&e.key==='ArrowLeft')go(scene-1);else if(e.key==='Escape'){hideBubble();if(mode==='note')setTool('mouse')}
   else if((e.metaKey||e.ctrlKey)&&e.key==='z'&&mode==='note'){e.preventDefault();$('undo').click()}});
 addEventListener('resize',()=>{hideBubble();fit();fitBoard();redraw()});
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600)}
