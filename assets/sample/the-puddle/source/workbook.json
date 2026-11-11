@@ -1,0 +1,145 @@
+{
+ "title": "The Puddle",
+ "bname": "Sample Book",
+ "num": 1,
+ "speakers": [
+  "Duck",
+  "Bear"
+ ],
+ "words": [
+  [
+   "puddle",
+   "water on the ground after rain"
+  ],
+  [
+   "gate",
+   "a small door in a fence"
+  ],
+  [
+   "wet",
+   "covered with water"
+  ],
+  [
+   "boots",
+   "shoes for rainy days"
+  ],
+  [
+   "splash",
+   "the sound of jumping in water"
+  ]
+ ],
+ "details": [
+  [
+   "When did it rain?",
+   [
+    "all day",
+    "all night"
+   ],
+   1
+  ],
+  [
+   "What color were the boots?",
+   [
+    "red",
+    "blue"
+   ],
+   0
+  ],
+  [
+   "Where did Bear sit?",
+   [
+    "by the fire",
+    "by the gate"
+   ],
+   0
+  ]
+ ],
+ "seq": [
+  "It rained all night.",
+  "Duck ran to Bear’s house.",
+  "Duck came back with two boots.",
+  "Bear and Duck jumped in the puddle."
+ ],
+ "retell": [
+  [
+   "First, Duck ",
+   "looked",
+   " out of the window."
+  ],
+  [
+   "Then, Duck ",
+   "ran",
+   " to Bear’s house."
+  ],
+  [
+   "Next, Bear ",
+   "put",
+   " on the boots."
+  ],
+  [
+   "Finally, they ",
+   "jumped",
+   " in the puddle."
+  ]
+ ],
+ "quotes": [
+  [
+   "“What a fine puddle!”",
+   0
+  ],
+  [
+   "“I do not want to get wet.”",
+   1
+  ],
+  [
+   "“Now your feet will stay dry.”",
+   0
+  ],
+  [
+   "“Come and jump in the puddle!”",
+   0
+  ],
+  [
+   "“No.”",
+   1
+  ]
+ ],
+ "think": [
+  {
+   "q": "Why did Bear stay inside?",
+   "fr": [
+    "He did not want to get ",
+    "wet",
+    "."
+   ]
+  },
+  {
+   "q": "Was Bear happy at the end?",
+   "ch": [
+    [
+     "Yes",
+     "No"
+    ],
+    0
+   ],
+   "fr": [
+    "He jumped in the puddle with his ",
+    "friend",
+    "."
+   ]
+  }
+ ],
+ "theme": [
+  "A good ",
+  "friend",
+  " finds a way to ",
+  "help",
+  "!"
+ ],
+ "draw": [
+  "How can YOU help a friend? Draw and write.",
+  "I can help my friend ",
+  "share my umbrella / tie a shoe",
+  "."
+ ]
+}

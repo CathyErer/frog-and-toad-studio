@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>__TITLE__</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4EDDB;--card:#FFFCF3;--ink:#34402B;--olive:#5E9440;--deep:#2F4F27;--brown:#8A6A45;--orange:#E8963A;--line:#E3D7BC}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);background-image:radial-gradient(rgba(122,82,48,.08) 1px,transparent 1px);background-size:18px 18px;color:var(--ink);font-family:"Baloo 2","Arial Rounded MT Bold","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+.zh{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-weight:500}body.en .zh{display:none}
+.wrap{max-width:1320px;margin:0 auto;padding:26px 28px 50px}
+header{display:flex;align-items:flex-end;gap:16px;margin-bottom:22px}h1{margin:0;font-size:44px;line-height:1;color:var(--deep)}header p{margin:0 0 4px;color:var(--brown);font-size:18px}
+#lang{margin-left:auto;font:inherit;font-weight:600;padding:7px 16px;border-radius:999px;background:var(--card);border:2px solid var(--line);cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:12px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px;box-shadow:0 6px 18px rgba(80,60,30,.10);transition:transform .15s}
+a.card:hover{transform:translateY(-4px);border-color:var(--olive)}.card.off{opacity:.72}
+.pic{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#F3EAD2}.pic img{width:100%;height:100%;object-fit:cover;display:block}.ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#C9B588;text-align:center;padding:10px}
+.num{position:absolute;left:8px;top:8px;width:34px;height:34px;border-radius:50%;background:var(--olive);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+h3{margin:6px 0 0;font-size:24px;color:var(--deep)}h3 .zh{font-size:15px;color:var(--brown);margin-left:4px}
+.card p{margin:0;font-size:16px;line-height:1.3;flex:1}.card p .zh{display:block;font-size:13px;color:var(--brown);margin-top:2px}
+.go{align-self:flex-start;margin-top:6px;padding:5px 16px;border-radius:999px;background:var(--olive);color:#fff;font-weight:700}.go.off{background:#ECE2C7;color:var(--brown)}
+h2{margin:34px 0 10px;font-size:26px;color:var(--deep)}
+.parts{display:flex;gap:10px;flex-wrap:wrap}.parts>span{background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 16px;font-weight:600;font-size:17px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:16px;overflow:hidden;border:2px solid var(--line);font-size:17px}th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}th{background:#ECE2C7;color:var(--brown)}tr:last-child td{border-bottom:0}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+.pic img{object-fit:contain !important;padding:8px;filter:drop-shadow(0 4px 5px rgba(80,60,30,.22))}.pic img{object-fit:contain !important;padding:8px;filter:drop-shadow(0 4px 5px rgba(80,60,30,.22))}</style></head><body><div class="wrap">
+<header><div><h1>__TITLE__</h1><p>__SUBTITLE__</p></div><button id="lang">中英</button></header>
+<div class="grid">__CARDS__</div>
+<h2>In every story <span class="zh" style="font-size:17px;color:var(--brown)">每个故事的五个部分</span></h2>
+<div class="parts"><span>Words <span class="zh">词汇</span></span><span>Read <span class="zh">点读精读</span></span><span>Retell <span class="zh">看图复述</span></span><span>Theme <span class="zh">寓意</span></span><span>Quiz <span class="zh">阅读理解</span></span></div>
+
+</div><script>const b=document.getElementById('lang');let en=false;try{en=localStorage.getItem('ft-lang')==='en'}catch(e){}
+const set=()=>{document.body.classList.toggle('en',en);b.textContent=en?'EN':'中英'};b.onclick=()=>{en=!en;try{localStorage.setItem('ft-lang',en?'en':'zh')}catch(e){}set()};set()</script></body></html>

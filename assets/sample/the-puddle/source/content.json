@@ -1,0 +1,376 @@
+{
+ "book": "Sample Book",
+ "story": "The Puddle",
+ "storyZh": "水坑",
+ "num": "01",
+ "lesson": 1,
+ "home": "../00 Sample Book 课件入口.html",
+ "proper": [
+  "i",
+  "duck",
+  "bear",
+  "bear's",
+  "duck's"
+ ],
+ "scenes": [
+  {
+   "title": "Rain all night",
+   "zh": "下了一夜雨",
+   "image": "01",
+   "question": "What did Duck see in the morning?",
+   "qzh": "鸭子早上看见了什么？",
+   "answer": "A big puddle by the gate.",
+   "azh": "门口有一个大水坑。",
+   "evidence": [
+    "s3"
+   ],
+   "lines": [
+    {
+     "id": "s1",
+     "text": "It rained all night.",
+     "zh": "下了一整夜的雨。"
+    },
+    {
+     "id": "s2",
+     "text": "In the morning Duck looked out of the window.",
+     "zh": "早上，鸭子往窗外看。"
+    },
+    {
+     "id": "s3",
+     "text": "There was a big puddle by the gate.",
+     "zh": "门口有一个大水坑。"
+    },
+    {
+     "id": "s4",
+     "text": "“What a fine puddle!” said Duck.",
+     "zh": "“好棒的水坑！”鸭子说。"
+    }
+   ],
+   "retell": {
+    "seq": "First",
+    "rows": [
+     {
+      "who": "Duck",
+      "did": [
+       "looked out of the window",
+       "a big puddle"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "title": "Bear will not come",
+   "zh": "熊不肯来",
+   "image": "02",
+   "question": "Why does Bear stay inside?",
+   "qzh": "熊为什么待在屋里？",
+   "answer": "He does not want to get wet.",
+   "azh": "他不想弄湿。",
+   "evidence": [
+    "s7"
+   ],
+   "lines": [
+    {
+     "id": "s5",
+     "text": "Duck ran to Bear’s house.",
+     "zh": "鸭子跑到熊家。"
+    },
+    {
+     "id": "s6",
+     "text": "“Come and jump in the puddle!” said Duck.",
+     "zh": "“来跳水坑吧！”鸭子说。"
+    },
+    {
+     "id": "s7",
+     "text": "“No,” said Bear. “I do not want to get wet.”",
+     "zh": "“不，”熊说，“我不想弄湿。”"
+    },
+    {
+     "id": "s8",
+     "text": "Bear sat by the fire.",
+     "zh": "熊坐在炉火边。"
+    }
+   ],
+   "retell": {
+    "seq": "Then",
+    "rows": [
+     {
+      "who": "Duck",
+      "did": [
+       "ran to Bear’s house",
+       "“jump in the puddle!”"
+      ]
+     },
+     {
+      "who": "Bear",
+      "did": [
+       "“I do not want to get wet.”",
+       "sat by the fire"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "title": "Two boots",
+   "zh": "两只雨靴",
+   "image": "03",
+   "question": "How does Duck help Bear?",
+   "qzh": "鸭子怎么帮熊？",
+   "answer": "She brings him two red boots.",
+   "azh": "她给熊带来两只红雨靴。",
+   "evidence": [
+    "s9",
+    "s10"
+   ],
+   "lines": [
+    {
+     "id": "s9",
+     "text": "Duck came back with two red boots.",
+     "zh": "鸭子带着两只红雨靴回来了。"
+    },
+    {
+     "id": "s10",
+     "text": "“Now your feet will stay dry,” she said.",
+     "zh": "“这样你的脚就不会湿了。”她说。"
+    },
+    {
+     "id": "s11",
+     "text": "Bear put on the boots.",
+     "zh": "熊穿上了雨靴。"
+    },
+    {
+     "id": "s12",
+     "text": "Splash! Splash! Bear and Duck jumped in the puddle together.",
+     "zh": "啪嗒！啪嗒！熊和鸭子一起跳进水坑。"
+    }
+   ],
+   "retell": {
+    "seq": "Finally",
+    "rows": [
+     {
+      "who": "Duck",
+      "did": [
+       "two red boots",
+       "“your feet will stay dry”"
+      ]
+     },
+     {
+      "who": "Bear + Duck",
+      "did": [
+       "put on the boots",
+       "jumped in the puddle together"
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "glossary": [
+  {
+   "word": "puddle",
+   "zh": "水坑",
+   "en": "water on the ground after rain",
+   "variants": []
+  },
+  {
+   "word": "gate",
+   "zh": "大门",
+   "en": "a small door in a fence",
+   "variants": []
+  },
+  {
+   "word": "wet",
+   "zh": "湿的",
+   "en": "covered with water",
+   "variants": []
+  },
+  {
+   "word": "boots",
+   "zh": "靴子",
+   "en": "shoes that cover your feet and legs",
+   "variants": []
+  },
+  {
+   "word": "splash",
+   "zh": "溅水声",
+   "en": "the sound of jumping in water",
+   "variants": []
+  },
+  {
+   "word": "look out of the window",
+   "zh": "往窗外看",
+   "en": "",
+   "variants": [
+    "looked out of the window"
+   ]
+  },
+  {
+   "word": "get wet",
+   "zh": "被弄湿",
+   "en": "",
+   "variants": []
+  },
+  {
+   "word": "stay dry",
+   "zh": "保持干燥",
+   "en": "",
+   "variants": []
+  },
+  {
+   "word": "put on",
+   "zh": "穿上",
+   "en": "",
+   "variants": []
+  }
+ ],
+ "words": [
+  {
+   "w": "puddle",
+   "zh": "水坑",
+   "en": "water on the ground after rain",
+   "ex": "I jumped in a puddle."
+  },
+  {
+   "w": "gate",
+   "zh": "大门",
+   "en": "a small door in a fence",
+   "ex": "Please close the gate."
+  },
+  {
+   "w": "wet",
+   "zh": "湿的",
+   "en": "covered with water",
+   "ex": "My socks are wet."
+  },
+  {
+   "w": "boots",
+   "zh": "靴子",
+   "en": "shoes that cover your feet and legs",
+   "ex": "I wear boots in the rain."
+  },
+  {
+   "w": "splash",
+   "zh": "溅水声",
+   "en": "the sound of jumping in water",
+   "ex": "Splash! The frog jumped in."
+  }
+ ],
+ "chunks": [
+  {
+   "w": "look out of the window",
+   "zh": "往窗外看",
+   "ex": "“In the morning Duck looked out of the window.”"
+  },
+  {
+   "w": "get wet",
+   "zh": "被弄湿",
+   "ex": "“I do not want to get wet.”"
+  },
+  {
+   "w": "stay dry",
+   "zh": "保持干燥",
+   "ex": "“Now your feet will stay dry.”"
+  },
+  {
+   "w": "put on",
+   "zh": "穿上",
+   "ex": "“Bear put on the boots.”"
+  }
+ ],
+ "theme": {
+  "image": "03",
+  "ask": "What does this story teach us?",
+  "askZh": "这个故事想告诉我们什么？",
+  "moral": "A good friend finds a way to help!",
+  "moralZh": "好朋友会想办法帮你",
+  "why": "Why did Duck bring the boots?",
+  "whyZh": "鸭子为什么带来雨靴？",
+  "because": "Bear did not want to get wet. With boots, his feet stay dry, so he can play too.",
+  "becauseZh": "熊不想弄湿。穿上雨靴脚就不会湿，他也能一起玩了。",
+  "you": "How can YOU help a friend?",
+  "youZh": "你能怎么帮朋友？",
+  "evidence": [
+   "s9",
+   "s10"
+  ],
+  "find": "Find it in the story",
+  "findZh": "回原文找依据"
+ },
+ "quiz": [
+  {
+   "skill": "Key details",
+   "skillZh": "关键细节",
+   "ccss": "RL.1.1",
+   "ixl": "II.1",
+   "q": "Where was the puddle?",
+   "options": [
+    "by the gate",
+    "in the kitchen",
+    "on the roof"
+   ],
+   "evidence": [
+    "s3"
+   ]
+  },
+  {
+   "skill": "Sequence",
+   "skillZh": "事件顺序",
+   "ccss": "RL.1.2",
+   "ixl": "DD.1",
+   "q": "What happened FIRST?",
+   "options": [
+    "It rained all night.",
+    "Bear put on the boots.",
+    "Duck ran to Bear’s house."
+   ],
+   "evidence": [
+    "s1"
+   ]
+  },
+  {
+   "skill": "Character",
+   "skillZh": "人物",
+   "ccss": "RL.1.3",
+   "ixl": "CC.3",
+   "q": "Bear sat by the fire. What does this show about Bear?",
+   "options": [
+    "He does not like to get wet.",
+    "He is very hungry.",
+    "He is angry with Duck."
+   ],
+   "evidence": [
+    "s7"
+   ]
+  },
+  {
+   "skill": "Inference",
+   "skillZh": "推断",
+   "ccss": "RL.1.4",
+   "ixl": "AA.3",
+   "q": "Why did Duck bring red boots?",
+   "options": [
+    "So Bear could play and stay dry.",
+    "Because Duck wanted new boots.",
+    "Because it was cold."
+   ],
+   "evidence": [
+    "s10"
+   ]
+  },
+  {
+   "skill": "Theme",
+   "skillZh": "寓意",
+   "ccss": "RL.1.2",
+   "ixl": "AA.5",
+   "q": "What does this story teach us?",
+   "options": [
+    "A good friend finds a way to help.",
+    "Never go out in the rain.",
+    "Puddles are bad."
+   ],
+   "evidence": []
+  }
+ ]
+}

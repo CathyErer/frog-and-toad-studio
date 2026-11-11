@@ -1,8 +1,8 @@
 interface:
   display_name: "Frog and Toad Studio"
-  short_description: "生成并维护 Frog and Toad 精读课三件套与固定搭配"
-  brand_color: "#71824A"
-  default_prompt: "Use $frog-and-toad-studio to update one source-grounded Frog and Toad lesson and its Obsidian record."
+  short_description: "Click-to-read close-reading courseware + colour workbook for each Frog and Toad story (ESL Grade 1)"
+  brand_color: "#5E9440"
+  default_prompt: "Use $frog-and-toad-studio to make the close-reading courseware and workbook for this Frog and Toad story."
 
 policy:
   allow_implicit_invocation: true

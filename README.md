@@ -1,79 +1,71 @@
-# frog-and-toad-studio
+# Frog and Toad Studio · 点读精读课
 
-**Frog and Toad 精读课 studio** — a Claude- and Codex-compatible skill that generates per-chapter teaching materials for Arnold Lobel's *Frog and Toad* series (I Can Read Level 2, ESL Grade 1).
+An agent skill that turns one *Frog and Toad* story (Arnold Lobel, I Can Read Level 2) into two finished teaching materials for ESL Grade 1:
 
-> An AI-agent skill compatible with Claude and Codex for generating a complete per-chapter "三件套" (three-piece set): a projection keyword-map HTML, a one-page Student Workbook .docx, and an Answer Key .docx — plus WeChat-ready lesson summaries and Obsidian sync.
+1. **Close-reading courseware** — one offline HTML per story: **Words → Read → Retell → Theme → Quiz**. Tap any sentence or word to hear it, draw and highlight anywhere, keep separate notes for each class, switch 中英 / EN, export the notes as a PDF for parents. Plus one entry page per book.
+2. **Colour workbook** — two pages (one sheet), student version and answer key, .docx and .pdf. Six parts: Words, Key Details, Sequence + retell, Character, Think, Theme & Me.
 
-## What it generates
+一个故事进去，两样成品出来：点读精读课件（离线 HTML）和配套的彩色两页练习册（学生版 + 答案版）。把书发给装了这个 skill 的 Claude / Codex，说"做这个故事的课件和练习册"就行。
 
-Each story = one lesson = one 三件套:
+> **v2 (2026-11)** replaces the v1 keyword-map skill. v1 is kept under the git tag [`v1-keyword-map`](../../tree/v1-keyword-map).
 
-1. **关键词地图 HTML** — projection lesson plan in a locked cream-paper hand-drawn style, 5 tabs (Warm-up · Vocabulary · Story Map · Characters · Theme), with a bilingual → English-only toggle
-2. **Student Workbook .docx** — one page, 4 fixed parts (Story Map verb fill-in · Think! inference · moral fill-in · Draw!)
-3. **Answer Key .docx** — same page with answers in red, bold, underlined
+Follows the open [Agent Skills](https://agentskills.io) format (`SKILL.md` + YAML front matter), so the same folder works in Claude (claude.ai, Claude Code), OpenAI Codex and other agents that support it.
 
-Plus, on demand: per-lesson **课程总结与作业（微信版）** paragraphs and **Obsidian** tracking-note sync.
+## Install · 安装
 
-## Repository layout
+The whole repository is one skill folder. 整个仓库就是一个 skill 文件夹。
 
-```
-frog-and-toad-studio/
-├── SKILL.md                        ← main skill: trigger rules + 7-step workflow
-├── config.example.json             ← portable path-configuration template
-├── sync-config.md                  ← portable path variables & sync rules
-├── sync-checklist.md               ← checklist used on every "检查同步" run
-├── assets/
-│   └── template_keyword_map.html   ← locked HTML template (Spring layout, original sample text), copy & replace content only
-├── references/
-│   └── course-map.md               ← all 20 lessons: moral / inference question / verb bank
-├── scripts/
-│   ├── make_workbooks.py           ← Workbook generator (student + answer key, 1 page each)
-│   └── sync_vocabulary_to_html.py  ← sync Vocabulary tab from Obsidian notes into the HTMLs
-└── skills/
-    └── frog-and-toad-illustration-style/
-        ├── SKILL.md                ← sub-skill: consistent watercolor illustration style
-        ├── prompts/                ← ready-made illustration prompt lists for all 20 chapters
-        └── agents/openai.yaml
+**Claude.ai / Claude desktop**: download the repository as a zip (Code → Download ZIP), then Settings → Capabilities → Skills → upload it.
+
+**Claude Code / Codex**:
+
+```bash
+# Claude Code
+git clone https://github.com/CathyErer/frog-and-toad-studio.git ~/.claude/skills/frog-and-toad-studio
+# OpenAI Codex
+git clone https://github.com/CathyErer/frog-and-toad-studio.git ~/.agents/skills/frog-and-toad-studio
 ```
 
-## First-time path setup
+**Update · 更新到最新版**: `git pull` inside that folder, or download the zip again and replace the old skill.
 
-The repository never stores a user's home-folder path. Before running the Obsidian vocabulary sync:
+## Use · 用法
 
-1. Copy `config.example.json` to `config.local.json`.
-2. Set `course_root` to the local Frog and Toad course-library folder.
-3. Set `obsidian_dir` to the local Frog and Toad tracking folder inside the Obsidian vault.
+Send the book (PDF or photos) and say which story, for example:
 
-Example:
+- "Make the courseware and workbook for *A Lost Button*." 
+- 「这是 Frog and Toad Together，帮我做 The Garden 的点读精读课件和练习册。」
 
-```json
-{
-  "course_root": "/path/to/Frog and Toad精读课",
-  "obsidian_dir": "/path/to/Obsidian Vault/课程升级追踪/桥梁/Frog and Toad"
-}
+The agent will: read the text (OCR for scans) → show you a page-by-page plan (pages, Think questions, retell keywords, theme, quiz) → build the courseware → make the workbook → check everything. 先给你看逐页方案，你确认后再生成。
+
+## What is inside
+
+```
+SKILL.md                     ← entry point: when to use, workflow, fixed rules
+references/close-reading.md  ← courseware: tabs, planning rules, content.json schema, checks
+references/workbook.md       ← workbook: six parts, question rules, workbook.json, layout
+references/illustration.md   ← optional clay-style picture prompts and checks
+references/course-map.md     ← all 20 stories: moral, core inference question, 10 story words
+assets/template.html         ← locked courseware template
+assets/entry_template.html   ← book entry page template
+assets/sample/the-puddle/    ← an original sample story (not from the books) to copy and test
+scripts/                     ← build.py, make_webp.py, align_audio.py, ocr_pages.py, check_text.py,
+                               make_entry.py, make_workbook.py, to_pdf.py
 ```
 
-`config.local.json` is ignored by Git, so private machine paths are never included in the public repository. If the file or either directory is missing, the sync script stops with a clear setup error instead of guessing a path.
+Try it with the sample:
 
-## Course coverage
+```bash
+python3 scripts/build.py assets/sample/the-puddle
+python3 scripts/make_workbook.py assets/sample/the-puddle
+python3 scripts/to_pdf.py "assets/sample/The Puddle Workbook"
+```
 
-20 lessons across the four books, in folder/book order: *Days with Frog and Toad* (01–05) → *Frog and Toad All Year* (06–10) → *Frog and Toad Together* (11–15) → *Frog and Toad Are Friends* (16–20). See `references/course-map.md` for the full table.
+Needs Python 3 with `pillow`, `python-docx`, `pypdfium2`; LibreOffice for PDF; `tesseract` for OCR.
 
-## Hard rules baked into the workflow
+## Copyright · 版权
 
-- **Verbatim quotes only** — every quote in the HTML / Workbook must match the book word-for-word
-- **Keywords confirmed first** — the keyword list is sent to the teacher for confirmation before anything is generated
-- **Never invent a new layout** — copy `assets/template_keyword_map.html` and replace content only
-- **Workbooks must be exactly 1 page** — verified by converting to PDF and asserting page count
-- HTML tag balance is self-checked with Python's HTMLParser before delivery
-
-## Notes
-
-- Local course-library and Obsidian paths are supplied through an untracked `config.local.json` file. The Obsidian sync and WeChat lesson-summary steps are optional — skip them if you don't use those tools.
-- Book PDFs, generated courseware, audio, and lesson-summary documents are **not** included in this repository — only the skill itself.
+This repository contains **no text, pictures or recordings from the Frog and Toad books**. Use your own copy of the book; keep the courseware you make for your own classes. The sample story is original. 仓库里不含原书的文字、插图和录音，请用你自己的书。
 
 ## License
 
-[MIT](LICENSE).
-
-*Frog and Toad* is © Arnold Lobel / HarperCollins. This repository distributes **no text from the books**: the HTML template ships with original placeholder sample text that only demonstrates the layout. When you build real lessons, quotes are transcribed from your own copy of the book and stay in your local course library — they are never committed here.
+MIT

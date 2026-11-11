@@ -1,18 +1,20 @@
 # macOS
 .DS_Store
-
-# Word temp files
-~$*.docx
-
 # Python
 __pycache__/
 *.pyc
-
-# packaged skill archives
+# Word / LibreOffice temp files
+~$*.docx
+.~lock*
+# packaged archives
 *.skill
 *.zip
-
-# Per-machine configuration and generated private course content
-config.local.json
-课程总结与作业（微信版）.md
-Frog and Toad 课程设计思路.md
+# generated outputs (rebuild with the scripts)
+assets/sample/*/*.html
+assets/sample/*/source/wordlist.json
+assets/sample/*Workbook/
+# never commit book content
+**/assets/story.mp3
+**/assets/images/
+**/assets/web/
+*.pdf

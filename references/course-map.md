@@ -1,55 +1,44 @@
-# Frog and Toad 全系列 20 课总表
+# Course map · 20 stories
 
-作者 Arnold Lobel ｜ I Can Read Level 2 ｜ ESL G1 ｜ 教学顺序 = 素材文件夹书序。
-完整版（含 IXL 技能对照、60min 课堂流程）在 Obsidian：`00 - Frog and Toad 全系列课程地图.md`。
+The teaching anchors for every story: the moral, the core inference question and the 10 story words. They are the course designer's own teaching choices (no text from the books). Use them as the default for Theme and Words; build everything else from the user's copy of the book.
 
-贯穿全系列：每课喂 T-chart（Frog: calm/patient/kind vs Toad: grumpy/worried/silly but lovable），
-最后一课总结 "What makes a good friend?"
 
-## Book 1 · Days with Frog and Toad（课 01–05）
+## Days with Frog and Toad
 
-| 课 | 故事 | 寓意 | 核心 inference 问题 | 动词词库 |
-|---|------|------|--------------------|---------|
-| 01 | Tomorrow | Do it today, don't wait for tomorrow! 今日事今日毕 | Why did Toad do all the work today? | picked up / washed / dusted / scrubbed / watered |
-| 02 | The Kite | Try again — don't listen to those who laugh! | How did they make the kite fly at last? | running / waving / jumping / shouting |
-| 03 | Shivers | A little scare is fun with a friend! | Was Frog's story true? | turned / ran / tied up / came |
-| 04 | The Hat | A good friend helps you quietly! | How did the hat become the right size? | came in / took / poured / put |
-| 05 | Alone | Alone does not mean sad! | Why did Frog want to be alone? | made / hurried / shouted / waved / slipped / pulled |
+| # | Story | Moral · 寓意 | Core inference question | Story words |
+|---|---|---|---|---|
+| 1 | Tomorrow 明天 | Do it today, don’t wait for tomorrow!（今日事今日毕） | Why did Toad do all the work today? | mess, take life easy, tomorrow, down in the dumps, picked up, washed, dusted, scrubbed, watered, right now |
+| 2 | The Kite 风筝 | Try again — don’t listen to those who laugh!（失败了就调整再试，别听嘲笑） | The robins said the kite would never fly. Were they right? | meadow, kite, bump, thud, crash, give up, junk, waving, shouting, higher |
+| 3 | Shivers 发抖 | A little scare is fun with a friend!（和朋友在一起，害怕也变有趣） | Was the Old Dark Frog story true? Does it matter? | shivers, howling, ghost, terrible, picnic, alone, hungry, tied up, safely, maybe |
+| 4 | The Hat 帽子 | A good friend helps you quietly!（好朋友会悄悄帮你） | Why did Frog pour water on the hat at night? | birthday, present, fit, tripped, bumped into, sad, big thoughts, quietly, shrink, just right |
+| 5 | Alone 独处 | Alone does not mean sad. You can be happy alone — and alone together!（独处不等于难过——一个人可以很幸福，好朋友还能"一起独处"） | Why did Frog want to be alone? | note, alone, island, sad, cheer up, sandwiches, iced tea, turtle, slipped, spoiled |
 
-## Book 2 · Frog and Toad All Year（课 06–10）
+## Frog and Toad All Year
 
-| 课 | 故事 | 寓意 | 核心 inference 问题 | 动词词库 |
-|---|------|------|--------------------|---------|
-| 06 | Down the Hill | You are braver than you think! | Why was Toad brave at first but not later? | knocked / pushed / fell / rushed / leaped / pulled |
-| 07 | The Corner | Keep looking — spring is just around the corner! | Where did little Frog find spring? Why THERE? | ran / told / walked / went / found / stopped |
-| 08 | Ice Cream | Never mind — try again! | Why did everyone run away from the "monster"? | bought / slipped / fell / hid / sank / ran |
-| 09 | The Surprise | A secret kindness makes YOU happy! | Why were both happy though the leaves blew away? | took / ran / looked / raked / blew / went |
-| 10 | Christmas Eve | The best present is being together! | Why did Toad take a rope, a lantern, AND a frying pan? | cooked / decorated / found / ran / wrapping / opened |
+| # | Story | Moral · 寓意 | Core inference question | Story words |
+|---|---|---|---|---|
+| 1 | Down the Hill 滑下山坡 | You are braver than you think!（你比你以为的更勇敢） | Did Toad really need Frog on the sled? | winter, wonderful, warm bed, winter clothes, sled, behind, rushed, leaped, alone, by yourself |
+| 2 | The Corner 转角 | Keep looking — spring is just around the corner!（别放弃，希望就在转角处（常常就在家门口）） | Where did little Frog find spring? Why THERE? | corner, spoiled, rain, tea, pollywog, look for, path, meadow, mud, garden |
+| 3 | Ice Cream 冰淇淋 | When things go wrong — never mind, try again!（出了岔子没关系，重新来一次就好） | Why did everyone think Toad was a monster? | hot, pond, sweet, cold, cone, melt, dripped, monster, hid, Never mind |
+| 4 | The Surprise 惊喜 | Kindness makes YOU happy — even when it’s a secret!（善意让自己幸福——哪怕没人知道） | The wind blew all the leaves back. Why were they STILL happy? | October, leaves, rake, garden shed, closet, lawn, secret, surprise, blew, happy |
+| 5 | Christmas Eve 平安夜 | The best present is being together!（最好的礼物，是和你一起过节） | Why did Toad take a rope, a lantern, AND a frying pan? | Christmas Eve, dinner, decorated, late, worried, terrible, rope, lantern, frying pan, present |
 
-## Book 3 · Frog and Toad Together（课 11–15）
+## Frog and Toad Together
 
-| 课 | 故事 | 寓意 | 核心 inference 问题 | 动词词库 |
-|---|------|------|--------------------|---------|
-| 11 | A List | Don't let the list run your day! | Why couldn't Toad run after his list? | sat / wrote / crossed / blew / ran / went |
-| 12 | The Garden | Be patient — seeds need time! | Why did Toad think the seeds were afraid? | planted / shouted / read / sang / played / came |
-| 13 | Cookies | Will power = saying NO to what you want! | Why did Frog give the cookies to the birds? | baked / ate / put / tied / climbed / flew |
-| 14 | Dragons and Giants | Real bravery is what you DO! | Were they really brave? How do you know? | climbed / jumped / trembling / hid / screamed / ran |
-| 15 | The Dream | Don't make your friend feel small! | Why did Frog get smaller and smaller? | having / wearing / played / walked / danced / standing |
+| # | Story | Moral · 寓意 | Core inference question | Story words |
+|---|---|---|---|---|
+| 1 | A List 清单 | Don’t let the list run your day!（清单是帮手，不是主人——别被计划绑住手脚） | Why couldn't Toad run after his list? | list, remember, crossed out, written down, walk, strong wind, blowing away, swamp, stick, nothing |
+| 2 | The Garden 花园 | Be patient — seeds need time!（耐心一点，好东西都需要时间慢慢长） | Why did Toad think the seeds were afraid? | garden, hard work, seeds, plant, grow, shouted, afraid, leave them alone, poems, green plants |
+| 3 | Cookies 饼干 | Will power = trying hard NOT to do what you really want to do!（自控力：努力不去做特别想做的事） | Why did Frog give the cookies to the birds? | baked, smell, taste, one after another, sick, last, will power, string, shelf, ladder |
+| 4 | Dragons and Giants 恶龙和巨人 | Real bravery is what you DO — not what you SAY!（真勇敢看行动，不看嘴硬） | Were Frog and Toad really brave? How do you know? | brave, dragon, giant, mirror, mountain, cave, snake, avalanche, trembling, closet |
+| 5 | The Dream 梦 | Don’t make your friend feel small — help your friend feel BIG!（别让朋友"变小"，要让朋友"变大"） | Why did Frog get smaller and smaller in the dream? | dream, stage, costume, theater, greatest, piano, high wire, tricks, danced, lonely |
 
-## Book 4 · Frog and Toad Are Friends（课 16–20）
+## Frog and Toad Are Friends
 
-| 课 | 故事 | 寓意 | 核心 inference 问题 | 动词词库 |
-|---|------|------|--------------------|---------|
-| 16 | Spring | Being with your friend is better than sleeping! | Why did Frog tear the calendar to May? | knocked / pushed / slept / tore / climbed / ran |
-| 17 | The Story | What you DO for a friend becomes the story! | Why did Toad pour water on his head? | walked / stood / poured / banged / told / fallen |
-| 18 | A Lost Button | Turn your trouble into a gift! | Why did Toad sew all the buttons on the jacket? | lost / found / screamed / slammed / sewed / gave |
-| 19 | A Swim | Everyone looks funny sometimes — it's okay! | Why did all the animals wait at the river? | swam / waited / shivered / climbed / dripped / laughed |
-| 20 | The Letter | A letter can turn sad time into happy time! | Why did Frog tell Toad what the letter said? | waited / wrote / gave / looked / sent / got |
-
-## 常用彩蛋（复述/出题可用）
-
-- 18 课五组反义词：black-white / two-four holes / small-big / square-round / thin-thick
-- 重复结构清单：The Story 想故事四连、A Lost Button 找错五连、A Swim 围观累积、
-  The Letter 望窗三连、Cookies 防线三连、Dragons and Giants 遇险三连、The Dream 炫耀三连
-- 呼应结构：The Letter（sad together → happy together）、Christmas Eve（坏钟 → 新钟）、
-  The Surprise / The Hat（双线秘密，读者全知视角）
+| # | Story | Moral · 寓意 | Core inference question | Story words |
+|---|---|---|---|---|
+| 1 | Spring 春天 | Being with your friend is better than sleeping!（和朋友在一起，比睡觉更好） | Why did Frog tear the calendar to May? | spring, wake up, Blah, clear, April, whole, together, calendar, tore off, lonely |
+| 2 | The Story 讲故事 | What you DO for a friend becomes the story!（为朋友做的事，本身就是故事） | Why did Toad pour water on his head? | not feeling well, green, resting, story, walked, stood on his head, poured, banged, better, terrible |
+| 3 | A Lost Button 丢纽扣 | Turn your trouble into a gift!（把麻烦变成礼物） | Why did Toad sew all the buttons on the jacket? | button, lost, jacket, pocket, square, round, thin, screamed, slammed, sewed |
+| 4 | A Swim 游泳 | Everyone looks funny sometimes — it’s okay!（谁都有出糗的时候，没关系） | Why did all the animals wait at the river? | swim, bathing suit, look funny, fast, slow, riverbank, waited, shiver, sneeze, laughed |
+| 5 | The Letter 信 | A letter can turn sad time into happy time!（一封信，让伤心时刻变开心） | Why did Frog tell Toad what the letter said? | porch, sad time, mail, mailbox, empty, hurried, envelope, snail, right away, pleased |
